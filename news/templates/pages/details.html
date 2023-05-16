@@ -1,0 +1,34 @@
+{% extends 'pages/main.html' %}
+
+{% block content  %}
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <img src="{{newsData.photo.url}}"  width="600px" height="300px" alt="image not found">
+        <h1>{{newsData.title}}</h1>
+        <p>{{newsData.description}}</p>
+    </div>
+</div>
+<div class="relatednews">
+    <!-- begin popular posts -->
+    <h2>Related News</h2>
+    <ul>
+        {% for x in related_news %}
+      <li><a href="{% url 'details' x.slug %}">{{x.title}}</a></li>
+      {% endfor %}
+    </ul>
+    <!-- end popular posts -->
+</div>
+<div class="row">
+    <div id="fb-root"></div>
+    <div class="fb-comments" data-href="http://127.0.0.1:8000/details" data-width="" data-numposts="5"></div>
+</div>
+
+<br>
+<hr>
+<br>
+
+{% endblock  %}
+

@@ -1,0 +1,40 @@
+{% extends 'pages/main.html' %}
+
+{% block content  %}
+<h1> News List</h1>
+<div class="container">
+    <div class="row">
+        <h1>{{newsD.name}}</h1>
+    </div>
+    <div class="row">
+        {% for x in newsD %}
+        <div id="content">
+            <!-- begin post -->
+            <div class="post">
+                <h2>{{x.name}}</h2>
+                <div class="col">
+                {% if x.photo %}
+                <div class="thumb"><a href="#"><img src="{{x.photo.url}}" alt="image not found"/></a></div>
+              {% endif %}
+              <h3><a href="#">{{x.title}}</a></h3>
+              <p class="date">Posted on {{x.created_at}}</p>
+              <p>{{x.summary}}</p>
+              <a class="continue" href="{% url 'details' x.slug %}">Continue Reading</a>
+            </div>
+            </div>
+            <!-- end post -->
+          </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="relatednews">
+    <!-- begin popular posts -->
+    <h2>Related News</h2>
+    <ul>
+      <li><a href="#">Make Money Online Creating Websites</a></li>
+    </ul>
+    <!-- end popular posts -->
+</div>
+
+
+{% endblock  %}

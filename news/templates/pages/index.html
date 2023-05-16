@@ -1,0 +1,48 @@
+
+{% extends 'pages/main.html' %}
+
+{% block content %}
+  <!-- BEGIN content -->
+  {% for x in catData %}
+  {% if x.news_set.all.count > 0 %}
+  <div id="content">
+    <!-- begin post -->
+    <div class="post">
+        <h2>{{x.name}}</h2>
+        <div class="col">
+        {% for news in x.news_set.all %}
+        {% if news.photo %}<br>
+        <div class="thumb"><a href="#"><img src="{{news.photo.url}}" alt="image not found"/></a></div>
+      {% endif %}
+      <h3><a href="#">{{news.title}}</a></h3>
+      <p class="date">Posted on {{news.created_at}}</p>
+      <p>{{news.summary}}</p>
+      <a class="continue" href="{% url 'details' news.slug %}">Continue Reading</a>
+      {% endfor %}
+    </div>
+    </div>
+    <!-- end post -->
+  </div>
+  {% endif %}
+  {% endfor %}
+  <hr>
+  <!-- END content -->
+  <!-- BEGIN sidebar -->
+  <div id="sidebar">
+    <div class="wrapper">
+      <!-- begin popular posts -->
+      <!-- BEGIN left -->
+      <div class="l sbar">
+      </div>
+      <!-- END left -->
+      <!-- BEGIN right -->
+
+      <!-- END right -->
+    </div>
+  </div>
+  <!-- END sidebar -->
+<!-- END wrapper -->
+</body>
+</html>
+
+{% endblock %}

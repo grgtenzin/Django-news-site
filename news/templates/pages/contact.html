@@ -1,0 +1,48 @@
+{% extends 'pages/main.html' %}
+
+{% block content %}
+
+<div id="content">
+    <!-- begin post -->
+    <div class="single">
+      <h2>Contact Us</h2>
+      <p>We would love to hear your feedback!</p>
+    </div>
+    <div class="row">
+      {% if messages %}
+      {% for x in messages %}
+      <div class="alert" role="alert">
+        {{x}}
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <!-- end post -->
+    <!-- begin comments -->
+    <div id="comments">
+      <div id="respond">
+        <form action="{% url 'contact' %}" method="post" id="commentform" name="contact">
+          {% csrf_token %}
+          <p>
+            <input type="text" name="name"  required id="name" value="" size="22" tabindex="1" />
+            <label for="name"><small>Name (required)</small></label>
+          </p><br>
+          <p>
+            <input type="text" name="email"  required id="email" value="" size="22" tabindex="2" />
+            <label for="email"><small>Mail (will not be published) (required)</small></label>
+          </p><br>
+          <p>
+            <textarea name="comment" type="text" required id="comment" cols="100%" rows="10" tabindex="4" placeholder="your feed back"></textarea>
+          </p><br>
+          <p>
+            <button name="submit" type="submit" id="submit">Submit Comment</button>
+          </p>
+        </form>
+      </div>
+    </div>
+    <!-- end comments -->
+  </div>
+
+
+
+{% endblock  %}

@@ -1,0 +1,56 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>
+  {% if title %}
+  {{title}} :: Django News
+    {% else %}
+  The Django News ::
+{% endif %}
+</title>
+<link rel="icon" href="{% static 'photos/applogo.png' %}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}"/>
+<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="ie.css" /><![endif]-->
+</head>
+<body>
+<!-- BEGIN wrapper -->
+<div id="wrapper">
+  <!-- BEGIN header -->
+  <div id="header">
+    <p class="links">More:
+    {% for x in pageData.all %}
+    <a href="{% url 'about' x.slug %}">{{x.name}} |</a>
+    {% endfor %}
+  </p>
+    <div class="break"></div>
+    <div class="logo">
+      <h1><a href="#">DJANGO News</a></h1>
+    </div>
+    <div class="break"></div>
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="{% url 'contact' %}">Contact us</a></li>
+      <div class="dropdown">
+        <button class="dropbtn">Category<i class="fa fa-caret-down"></i></button>
+        <div class="dropcontent">
+          {% for x in globalData %}
+          <a href="{% url 'category_news' x.slug %}">{{x.name}}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <li>
+     <!-- begin search -->
+    <form class="search" action="{% url 'news' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="search" required id="search"/>
+      <button type="submit">Search</button>
+    </form>
+    <!-- end search -->
+      </li>
+    </ol>
+    <div class="break"></div>
+  </div>
+  <!-- END header -->
